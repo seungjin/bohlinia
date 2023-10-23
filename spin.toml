@@ -1,0 +1,17 @@
+spin_manifest_version = "1"
+authors = ["Seungjin Kim <seungjin@seungjin.net>"]
+description = ""
+name = "bohlinia"
+trigger = { type = "http", base = "/" }
+version = "0.1.0"
+
+[[component]]
+id = "webfinger"
+source = "webfinger/target/wasm32-wasi/release/webfinger.wasm"
+allowed_http_hosts = []
+[component.trigger]
+route = "/.well-known/webfinger"
+[component.build]
+command = "cargo build --target wasm32-wasi --release"
+workdir = "webfinger"
+watch = ["src/**/*.rs", "Cargo.toml"]
